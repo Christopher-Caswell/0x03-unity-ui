@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
             SetScoreText();
             Object.Destroy(other.gameObject);
 
-            if (score == 69 && health >= 1)
+            if (score == 69 && health >= 5)
             {
                 WinLoseText.color = UnityEngine.Color.red;
                 WinLoseText.text = "EfFoRT!!1!";
