@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        /// <summary>
+        /// Update the vitality of the player
+        /// </summary>
         if (health <= 0)
         {
             WinLoseBG.gameObject.SetActive(true);
@@ -40,6 +43,9 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(LoadScene(3));
         }
 
+        /// <summary>
+        /// Take key input and open menu
+        /// </summary>
         if (Input.GetKey("w"))
         {
             x.AddForce(0, 0, speed * Time.deltaTime);
@@ -62,8 +68,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Trigger collision with elements of the game
+    /// </summary>
     void OnTriggerEnter(Collider other)
     {
+        /// <summary>
+        /// If the player collides with a pickup, add to score
+        /// </summary>
         if (other.GetComponent<Collider>().tag == "Pickup")
         {
             // other.gameObject.SetActive(false);
@@ -89,7 +101,9 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(LoadScene(4));
             }
         }
-
+        /// <summary>
+        /// If the player collides with an enemy, take damage
+        /// </summary>
         if (other.GetComponent<Collider>().tag == "Trap")
         {
             health--;
@@ -105,17 +119,24 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(LoadScene(3));
         }
     }
-
+    /// <summary>
+    /// Set the score text in string form
+    /// </summary>
     void SetScoreText()
     {
         scoreText.text = "Score: " + score;
     }
-
+    /// <summary>
+    /// Set the health text in string form
+    /// </summary>
     void SetHealthText()
     {
         healthText.text = ($"Health: {health}");
     }
 
+    /// <summary>
+    /// Loads the next scene, the menu, or the game over screen
+    /// </summary>
     IEnumerator LoadScene(float seconds)
     {
     yield return new WaitForSeconds(seconds);
